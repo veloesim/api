@@ -18,6 +18,10 @@
 
 [4.2 getOneEsim](#42-getOneEsim)
 
+[4.3 getEsimTopUpPlans](#43-getEsimTopUpPlans)
+
+[4.4 topUpEsim](#44-topUpEsim)
+
 
 # 1. Plans
 ## 1.1 getAllPlans
@@ -484,6 +488,8 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/esims?limit=6&offse
       "installedAt": null,
       "assignedPlans": [
         {
+          "id": 89,
+          "planId": 5,
           "initialQuantityInBytes": 1000000000,
           "remainingQuantityInBytes": 1000000000,
           "startTime": null,
@@ -509,6 +515,8 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/esims?limit=6&offse
       "installedAt": null,
       "assignedPlans": [
         {
+          "id": 90,
+          "planId": 5,
           "initialQuantityInBytes": 1000000000,
           "remainingQuantityInBytes": 1000000000,
           "startTime": null,
@@ -534,6 +542,8 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/esims?limit=6&offse
       "installedAt": null,
       "assignedPlans": [
         {
+          "id": 91,
+          "planId": 5,
           "initialQuantityInBytes": 1000000000,
           "remainingQuantityInBytes": 1000000000,
           "startTime": null,
@@ -559,6 +569,8 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/esims?limit=6&offse
       "installedAt": null,
       "assignedPlans": [
         {
+          "id": 92,
+          "planId": 5,
           "initialQuantityInBytes": 1000000000,
           "remainingQuantityInBytes": 1000000000,
           "startTime": null,
@@ -584,6 +596,8 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/esims?limit=6&offse
       "installedAt": null,
       "assignedPlans": [
         {
+          "id": 93,
+          "planId": 5,
           "initialQuantityInBytes": 1000000000,
           "remainingQuantityInBytes": 1000000000,
           "startTime": null,
@@ -630,6 +644,175 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/esims/8937204016163
   "installedAt": null,
   "assignedPlans": [
     {
+      "id": 89,
+      "planId": 5,
+      "initialQuantityInBytes": 1000000000,
+      "remainingQuantityInBytes": 1000000000,
+      "startTime": null,
+      "endTime": null,
+      "isExpired": false,
+      "areas": [
+        {
+          "id": 49,
+          "name": "Greece",
+          "region": "Europe",
+          "iso": "GR"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## 4.3 getEsimTopUpPlans
+
+### Description
+This request retrieves the available top-up plans for the eSIM.
+
+### Inputs
+| Parameter |Presence| Description           |
+|-----------|--------|-----------------------|
+|limit|Optional|The maximum number of results to return|
+|offset|Optional|The number of results to skip before starting to return results|
+| iccid     |Mandatory| the iccid of the eSIM |
+| planId    |Mandatory| ID of the plan |
+
+#### Request
+```shell
+curl --location 'https://api.veloesim.com:2053/api/wholesale/esims/8937204016163448888/top-up' \
+--header 'Authorization: Apikey {{apiKey}}'
+```
+#### Answer
+
+```json
+{
+    "count": 5,
+    "rows": [
+        {
+            "id": 5,
+            "dataAmount": 1000,
+            "duration": 7,
+            "price": 5,
+            "areas": [
+                {
+                    "id": 124,
+                    "name": "Albania",
+                    "region": "Europe",
+                    "iso": "AL"
+                }
+            ]
+        },
+        {
+            "id": 593,
+            "dataAmount": 3000,
+            "duration": 30,
+            "price": 12,
+            "areas": [
+                {
+                    "id": 124,
+                    "name": "Albania",
+                    "region": "Europe",
+                    "iso": "AL"
+                }
+            ]
+        },
+        {
+            "id": 985,
+            "dataAmount": 5000,
+            "duration": 30,
+            "price": 18,
+            "areas": [
+                {
+                    "id": 124,
+                    "name": "Albania",
+                    "region": "Europe",
+                    "iso": "AL"
+                }
+            ]
+        },
+        {
+            "id": 1524,
+            "dataAmount": 10000,
+            "duration": 30,
+            "price": 25,
+            "areas": [
+                {
+                    "id": 124,
+                    "name": "Albania",
+                    "region": "Europe",
+                    "iso": "AL"
+                }
+            ]
+        },
+        {
+            "id": 1976,
+            "dataAmount": 20000,
+            "duration": 30,
+            "price": 42,
+            "areas": [
+                {
+                    "id": 124,
+                    "name": "Albania",
+                    "region": "Europe",
+                    "iso": "AL"
+                }
+            ]
+        }
+    ]
+}
+```
+
+## 4.4 topUpEsim
+
+### Description
+This request tops up the eSIM.
+
+### Inputs
+| Parameter |Presence| Description           |
+|-----------|--------|-----------------------|
+| iccid     |Mandatory| the iccid of the eSIM |
+| planId    |Mandatory| ID of the plan |
+
+#### Request
+```shell
+curl --location 'https://api.veloesim.com:2053/api/wholesale/esims/8932042000006085302/top-up' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Apikey {{apiKey}}'
+--data '{
+    "planId": 5
+}'
+```
+#### Answer
+
+```json
+{
+  "iosSetup": "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$address.test$K2-22XXXX-LCIUXQ",
+  "iccid": "8937204016163448888",
+  "matchingId": "K2-22XXXX-LCIUXQ",
+  "smdpAddress": "address.test",
+  "profileStatus": "RELEASED",
+  "installedAt": null,
+  "assignedPlans": [
+    {
+      "id": 89,
+      "planId": 5,
+      "initialQuantityInBytes": 1000000000,
+      "remainingQuantityInBytes": 402593548,
+      "startTime": "2024-05-18T19:24:18.000Z",
+      "endTime": "2024-05-25T20:00:00.000Z",
+      "isExpired": false,
+      "areas": [
+        {
+          "id": 49,
+          "name": "Greece",
+          "region": "Europe",
+          "iso": "GR"
+        }
+      ]
+    },
+    {
+      "id": 95,
+      "planId": 5,
       "initialQuantityInBytes": 1000000000,
       "remainingQuantityInBytes": 1000000000,
       "startTime": null,
