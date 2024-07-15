@@ -412,12 +412,16 @@ curl --location 'https://api.veloesim.com:2053/api/wholesale/organizations' \
 ## 3.1 orderOne
 
 ### Description
-This request can be used to buy the plan.
+This request can be used to purchase the plan. 
+If the customer email is provided, the plan will be assigned to the customer, and the customer will become a VeloeSIM user. 
+The user will receive a password to log in to the VeloeSIM application.
 
 ### Inputs
-| Parameter |Presence| Description  |
-|------|--------|--------------|
-|planId|Mandatory|ID of the plan|
+| Parameter        | Presence  | Description               |
+|------------------|-----------|---------------------------|
+| planId           | Mandatory | ID of the plan            |
+| customerEmail    | optional  | Email of the customer     |
+| customerFullName | optional  | Full name of the customer |
 
 #### Request
 ```shell
@@ -775,11 +779,11 @@ This request tops up the eSIM.
 
 #### Request
 ```shell
-curl --location 'https://api.veloesim.com:2053/api/wholesale/esims/8932042000006085302/top-up' \
+curl --location 'https://api.veloesim.com:2053/api/wholesale/esims/8937204016163448888/top-up' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Apikey {{apiKey}}'
 --data '{
-    "planId": 5
+    "planId": 1
 }'
 ```
 #### Answer
